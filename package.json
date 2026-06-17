@@ -1,7 +1,7 @@
 {
-  "name": "adorable-ascension",
+  "name": "ethinstitute-web",
   "type": "module",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "engines": {
     "node": ">=22.12.0"
   },
