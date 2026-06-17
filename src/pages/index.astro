@@ -1,120 +1,537 @@
 ---
 import Base from '../layouts/Base.astro';
-
-const focusAreas = [
-  {
-    id: 'research',
-    title: 'Research',
-    body: 'Open, peer-reviewed work on protocol design, scaling, cryptoeconomics, and the security of decentralized systems.',
-  },
-  {
-    id: 'education',
-    title: 'Education',
-    body: 'Curricula, workshops, and explainers that take builders from first principles to production-grade smart contracts.',
-  },
-  {
-    id: 'community',
-    title: 'Community',
-    body: 'A neutral home for researchers, developers, and institutions to collaborate in the open and in the public interest.',
-  },
-];
+import { site, hero, overview, focus, properties, library, faq, contact, disclaimer } from '../data/site';
 ---
 
 <Base>
-  <section class="container hero">
-    <p class="eyebrow">Independent · Open · Public good</p>
-    <h1>Advancing Ethereum through<br /><span class="grad">research and education.</span></h1>
-    <p class="lede">
-      The Ethereum Institute is a non-profit hub for rigorous research, practical
-      education, and open collaboration across the Ethereum ecosystem.
-    </p>
-    <div class="cta-row">
-      <a class="btn primary" href="/#research">Explore our work</a>
-      <a class="btn ghost" href="/#about">About the Institute</a>
+  <!-- 00 - Hero -->
+  <section class="section hero dot-field" aria-label="Introduction">
+    <div class="container">
+      <p class="eyebrow">{hero.eyebrow}</p>
+      <h1 class="display hero-headline">{hero.headline}</h1>
+      <p class="lede hero-lede">{hero.lede}</p>
+      <nav class="hero-links" aria-label="Jump to">
+        {
+          hero.links.map((l) => (
+            <a class="link" href={l.href}>
+              {l.label} <span class="arrow">{l.arrow}</span>
+            </a>
+          ))
+        }
+      </nav>
+      <p class="mono hero-dateline">{hero.dateline}</p>
     </div>
   </section>
 
-  <section class="container grid" aria-label="Focus areas">
-    {focusAreas.map((area) => (
-      <article class="card" id={area.id}>
-        <h2>{area.title}</h2>
-        <p>{area.body}</p>
-      </article>
-    ))}
+  <!-- 01 - Overview / Mission -->
+  <section class="section" id="overview">
+    <div class="container reading">
+      <div class="dot-row" aria-hidden="true"></div>
+      <p class="eyebrow">{overview.eyebrow}</p>
+      <h2 class="display section-head">{overview.headline}</h2>
+      <div class="prose">
+        {overview.body.map((p) => <p>{p}</p>)}
+      </div>
+      <div class="cta-row">
+        {
+          overview.links.map((l) => (
+            <a class="link" href={l.href}>
+              {l.label} <span class="arrow">{l.arrow}</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
   </section>
 
-  <section class="container about" id="about">
-    <h2>Built in the open, for everyone.</h2>
-    <p>
-      We believe the infrastructure of the open internet should be studied,
-      taught, and improved in public. The Institute publishes its research freely,
-      keeps its educational material open-source, and works with the broader
-      community to strengthen the foundations of decentralized systems.
-    </p>
-    <p class="note">This site is in early development — more soon.</p>
+  <!-- 02 - Research Focus Areas -->
+  <section class="section" id="research-focus">
+    <div class="container">
+      <div class="dot-row" aria-hidden="true"></div>
+      <p class="eyebrow">{focus.eyebrow}</p>
+      <h2 class="display section-head">{focus.headline}</h2>
+      <p class="lede section-intro">{focus.intro}</p>
+      <div class="cards">
+        {
+          focus.areas.map((a) => (
+            <article class="card">
+              <p class="card-code mono">{a.code}</p>
+              <h3 class="card-title">{a.title}</h3>
+              <p class="card-body">{a.body}</p>
+              <p class="card-track mono">{a.track}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 - The Properties (case for Ethereum) -->
+  <section class="section" id="properties">
+    <div class="container">
+      <div class="dot-row" aria-hidden="true"></div>
+      <p class="eyebrow">{properties.eyebrow}</p>
+      <h2 class="display section-head">{properties.headline}</h2>
+      <p class="lede section-intro">{properties.intro}</p>
+
+      <div class="ledger">
+        <div class="ledger-head mono">
+          <span class="col-code"></span>
+          <span>{properties.columns[0]}</span>
+          <span>{properties.columns[1]}</span>
+          <span>{properties.columns[2]}</span>
+        </div>
+        {
+          properties.rows.map((r) => (
+            <div class="ledger-row">
+              <span class="col-code mono">{r.code}</span>
+              <span class="col-name">{r.name}</span>
+              <span class="col-meaning">{r.meaning}</span>
+              <span class="col-note mono">{r.note}</span>
+            </div>
+          ))
+        }
+      </div>
+      <p class="mono ledger-foot">{properties.footnote}</p>
+    </div>
+  </section>
+
+  <!-- 04 - Library / Reading Room -->
+  <section class="section" id="library">
+    <div class="container">
+      <div class="dot-row" aria-hidden="true"></div>
+      <p class="eyebrow">{library.eyebrow}</p>
+      <h2 class="display section-head">{library.headline}</h2>
+      <p class="lede section-intro">{library.intro}</p>
+
+      {
+        library.groups.map((g) => (
+          <div class="lib-group">
+            <p class="lib-label mono">{g.label}</p>
+            <ul class="lib-list">
+              {g.items.map((it) =>
+                'href' in it && it.href ? (
+                  <li class="lib-item">
+                    <a class="lib-row" href={it.href} target="_blank" rel="noopener">
+                      <span class="lib-title">{it.title}</span>
+                      <span class="lib-meta mono">{it.meta} ↗</span>
+                    </a>
+                  </li>
+                ) : (
+                  <li class="lib-item lib-item--static">
+                    <span class="lib-title">{it.title}</span>
+                    <span class="lib-meta mono">{it.meta}</span>
+                  </li>
+                )
+              )}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- 05 - FAQ -->
+  <section class="section" id="faq">
+    <div class="container reading">
+      <div class="dot-row" aria-hidden="true"></div>
+      <p class="eyebrow">{faq.eyebrow}</p>
+      <h2 class="display section-head">{faq.headline}</h2>
+      <p class="prose faq-disclaimer">{faq.disclaimer}</p>
+
+      {
+        faq.groups.map((g) => (
+          <div class="faq-group">
+            <p class="faq-cat mono">{g.label}</p>
+            {g.items.map((item) => (
+              <details class="faq-item">
+                <summary>
+                  <span class="faq-q">{item.q}</span>
+                  <span class="faq-mark" aria-hidden="true"></span>
+                </summary>
+                <div class="faq-a">
+                  <p>{item.a}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- 06 - Get in touch -->
+  <section class="section contact dot-field" id="contact">
+    <div class="container reading">
+      <div class="dot-row" aria-hidden="true"></div>
+      <p class="eyebrow">{contact.eyebrow}</p>
+      <h2 class="display section-head">{contact.headline}</h2>
+      <p class="prose">{contact.body}</p>
+      <a class="contact-email" href={`mailto:${site.email}`}>{site.email.toUpperCase()} <span class="arrow">→</span></a>
+      <p class="mono contact-note">{contact.note}</p>
+    </div>
+  </section>
+
+  <!-- 07 - Disclaimer -->
+  <section class="section" id="disclaimer">
+    <div class="container reading">
+      <p class="eyebrow">{disclaimer.eyebrow}</p>
+      <h2 class="display disclaimer-head">{disclaimer.headline}</h2>
+      <p class="prose disclaimer-body">{disclaimer.body}</p>
+    </div>
   </section>
 
   <style>
-    .hero { padding-top: 64px; padding-bottom: 48px; }
-    .eyebrow {
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      font-size: 0.78rem;
-      color: var(--accent-2);
-      margin: 0 0 14px;
+    .reading {
+      max-width: var(--read);
     }
-    h1 {
-      font-size: clamp(2.1rem, 5.5vw, 3.6rem);
-      line-height: 1.08;
-      margin: 0 0 18px;
-      letter-spacing: -0.02em;
+    .section-head {
+      margin-top: 14px;
     }
-    .grad {
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+    .section-intro {
+      margin-top: 22px;
+      color: var(--text);
     }
-    .lede { font-size: 1.15rem; color: var(--muted); max-width: 60ch; margin: 0 0 28px; }
-
-    .cta-row { display: flex; gap: 14px; flex-wrap: wrap; }
-    .btn {
-      display: inline-block;
-      padding: 12px 22px;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      border: 1px solid transparent;
-      transition: transform 0.12s ease, background 0.2s ease, border-color 0.2s ease;
-    }
-    .btn:hover { transform: translateY(-1px); }
-    .btn.primary { background: linear-gradient(90deg, var(--accent), #6c7cff); color: #0b0e17; }
-    .btn.ghost { border-color: var(--border); color: var(--text); }
-    .btn.ghost:hover { border-color: var(--accent); }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
+    .prose {
+      max-width: 68ch;
       margin-top: 24px;
     }
-    .card {
-      background: linear-gradient(180deg, var(--panel), var(--bg-soft));
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 26px 24px;
-      scroll-margin-top: 90px;
+    .prose p {
+      margin: 0 0 1.1em;
     }
-    .card h2 { margin: 0 0 10px; font-size: 1.25rem; }
-    .card p { margin: 0; color: var(--muted); }
+    .prose p:last-child {
+      margin-bottom: 0;
+    }
 
-    .about { margin-top: 72px; scroll-margin-top: 90px; max-width: 70ch; }
-    .about h2 { font-size: clamp(1.6rem, 3.5vw, 2.2rem); margin: 0 0 16px; letter-spacing: -0.01em; }
-    .about p { color: var(--muted); font-size: 1.05rem; }
-    .note { color: var(--accent-2); font-size: 0.95rem; }
+    /* Hero */
+    .hero {
+      padding-top: clamp(72px, 11vw, 132px);
+    }
+    .hero-headline {
+      margin-top: 18px;
+      max-width: 16ch;
+    }
+    .hero-lede {
+      margin-top: 28px;
+    }
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 30px;
+      margin-top: 34px;
+    }
+    .hero-links .link {
+      font-size: 18px;
+    }
+    .hero-dateline {
+      margin-top: 40px;
+      letter-spacing: 0.14em;
+    }
 
-    @media (max-width: 820px) {
-      .grid { grid-template-columns: 1fr; }
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 28px;
+      margin-top: 28px;
+    }
+
+    /* Focus cards - ruled cells, no fill */
+    .cards {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+    .card {
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: clamp(24px, 3vw, 38px);
+      display: flex;
+      flex-direction: column;
+      min-height: 240px;
+    }
+    .card-code {
+      margin: 0 0 18px;
+      letter-spacing: 0.18em;
+    }
+    .card-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      font-size: clamp(21px, 2.4vw, 27px);
+      line-height: 1.15;
+      margin: 0 0 14px;
+    }
+    .card-body {
+      margin: 0 0 22px;
+      font-size: 17px;
+      color: var(--text);
+    }
+    .card-track {
+      margin: auto 0 0;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+    }
+
+    /* Properties ledger - hairline-ruled table, no fills */
+    .ledger {
+      margin-top: 40px;
+      border-top: 1px solid var(--text);
+    }
+    .ledger-head,
+    .ledger-row {
+      display: grid;
+      grid-template-columns: 52px 1.1fr 2.3fr 1.4fr;
+      gap: 24px;
+      align-items: baseline;
+      padding: 20px 4px;
+      border-bottom: 1px solid var(--line);
+    }
+    .ledger-head {
+      padding-block: 12px;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+    }
+    .col-code {
+      color: var(--text-secondary);
+    }
+    .col-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: -0.01em;
+    }
+    .col-meaning {
+      font-size: 17px;
+      color: var(--text);
+    }
+    .col-note {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      font-feature-settings: 'tnum';
+    }
+    .ledger-row {
+      transition: border-color 0.16s ease;
+    }
+    .ledger-row:hover {
+      border-bottom-color: var(--text);
+    }
+    .ledger-foot {
+      margin-top: 18px;
+      letter-spacing: 0.1em;
+      font-size: 11px;
+    }
+
+    /* Library / reading room */
+    .lib-group {
+      margin-top: 44px;
+    }
+    .lib-label {
+      letter-spacing: 0.16em;
+      font-size: 11px;
+      margin: 0 0 10px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--text);
+    }
+    .lib-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .lib-item,
+    .lib-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 24px;
+      padding: 16px 2px;
+      border-bottom: 1px solid var(--line);
+    }
+    .lib-row {
+      padding: 0;
+      border: 0;
+      width: 100%;
+    }
+    .lib-title {
+      font-size: 18px;
+      overflow-wrap: anywhere;
+    }
+    .lib-meta {
+      font-size: 11px;
+      white-space: nowrap;
+      letter-spacing: 0.08em;
+      text-align: right;
+    }
+    .lib-row .lib-title {
+      background-image: linear-gradient(currentColor, currentColor);
+      background-size: 0% 1px;
+      background-repeat: no-repeat;
+      background-position: 0 100%;
+      transition: background-size 0.16s ease;
+      padding-bottom: 1px;
+    }
+    .lib-row:hover .lib-title {
+      background-size: 100% 1px;
+    }
+
+    /* FAQ */
+    .faq-disclaimer {
+      color: var(--text-secondary);
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+    .faq-group {
+      margin-top: 40px;
+    }
+    .faq-cat {
+      letter-spacing: 0.16em;
+      font-size: 11px;
+      margin: 0 0 4px;
+      padding-bottom: 10px;
+      border-bottom: 1px dotted var(--line);
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--line);
+    }
+    .faq-item summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 20px 2px;
+    }
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+    .faq-q {
+      font-size: clamp(18px, 2vw, 21px);
+      font-weight: 500;
+      line-height: 1.35;
+    }
+    .faq-mark {
+      position: relative;
+      flex: none;
+      width: 16px;
+      height: 16px;
+      margin-top: 6px;
+    }
+    .faq-mark::before,
+    .faq-mark::after {
+      content: '';
+      position: absolute;
+      background: var(--text-secondary);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    .faq-mark::before {
+      top: 7px;
+      left: 0;
+      width: 16px;
+      height: 1.5px;
+    }
+    .faq-mark::after {
+      top: 0;
+      left: 7px;
+      width: 1.5px;
+      height: 16px;
+    }
+    .faq-item[open] .faq-mark::after {
+      transform: rotate(90deg);
+      opacity: 0;
+    }
+    .faq-a {
+      padding: 0 2px 24px;
+      max-width: 70ch;
+    }
+    .faq-a p {
+      margin: 0;
+      color: var(--text);
+    }
+
+    /* Contact */
+    .contact {
+      padding-block: clamp(80px, 11vw, 140px);
+    }
+    .contact-email {
+      display: inline-block;
+      margin-top: 30px;
+      font-family: var(--font-mono);
+      letter-spacing: 0.08em;
+      font-size: clamp(18px, 2.6vw, 26px);
+      background-image: linear-gradient(currentColor, currentColor);
+      background-size: 0% 1.5px;
+      background-repeat: no-repeat;
+      background-position: 0 100%;
+      transition: background-size 0.18s ease;
+      padding-bottom: 3px;
+    }
+    .contact-email:hover {
+      background-size: 100% 1.5px;
+    }
+    .contact-email .arrow {
+      color: var(--text-secondary);
+    }
+    .contact-note {
+      margin-top: 26px;
+      letter-spacing: 0.14em;
+    }
+
+    /* Disclaimer */
+    .disclaimer-head {
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-top: 14px;
+    }
+    .disclaimer-body {
+      color: var(--text-secondary);
+      font-size: 17px;
+    }
+
+    @media (max-width: 760px) {
+      .cards {
+        grid-template-columns: 1fr;
+      }
+      .card {
+        min-height: 0;
+      }
+      .ledger-head {
+        display: none;
+      }
+      .ledger-row {
+        grid-template-columns: 44px 1fr;
+        grid-template-areas:
+          'code name'
+          'code meaning'
+          'code note';
+        gap: 6px 18px;
+        row-gap: 8px;
+      }
+      .col-code {
+        grid-area: code;
+      }
+      .col-name {
+        grid-area: name;
+      }
+      .col-meaning {
+        grid-area: meaning;
+      }
+      .col-note {
+        grid-area: note;
+        margin-top: 4px;
+      }
+      .lib-item,
+      .lib-row {
+        flex-direction: column;
+        gap: 6px;
+      }
+      .lib-meta {
+        text-align: left;
+        white-space: normal;
+        overflow-wrap: anywhere;
+      }
     }
   </style>
 </Base>
