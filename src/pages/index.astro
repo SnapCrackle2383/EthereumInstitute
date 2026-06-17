@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { site, hero, overview, focus, properties, library, faq, contact, disclaimer } from '../data/site';
+import { site, hero, overview, pillars, verticals, faq, contact } from '../data/site';
 ---
 
 <Base>
@@ -44,16 +44,16 @@ import { site, hero, overview, focus, properties, library, faq, contact, disclai
     </div>
   </section>
 
-  <!-- 02 - Research Focus Areas -->
-  <section class="section" id="research-focus">
+  <!-- 02 - The Four Pillars -->
+  <section class="section" id="pillars">
     <div class="container">
       <div class="dot-row" aria-hidden="true"></div>
-      <p class="eyebrow">{focus.eyebrow}</p>
-      <h2 class="display section-head">{focus.headline}</h2>
-      <p class="lede section-intro">{focus.intro}</p>
+      <p class="eyebrow">{pillars.eyebrow}</p>
+      <h2 class="display section-head">{pillars.headline}</h2>
+      <p class="lede section-intro">{pillars.intro}</p>
       <div class="cards">
         {
-          focus.areas.map((a) => (
+          pillars.areas.map((a) => (
             <article class="card">
               <p class="card-code mono">{a.code}</p>
               <h3 class="card-title">{a.title}</h3>
@@ -66,23 +66,23 @@ import { site, hero, overview, focus, properties, library, faq, contact, disclai
     </div>
   </section>
 
-  <!-- 03 - The Properties (case for Ethereum) -->
-  <section class="section" id="properties">
+  <!-- 03 - Priority Verticals -->
+  <section class="section" id="verticals">
     <div class="container">
       <div class="dot-row" aria-hidden="true"></div>
-      <p class="eyebrow">{properties.eyebrow}</p>
-      <h2 class="display section-head">{properties.headline}</h2>
-      <p class="lede section-intro">{properties.intro}</p>
+      <p class="eyebrow">{verticals.eyebrow}</p>
+      <h2 class="display section-head">{verticals.headline}</h2>
+      <p class="lede section-intro">{verticals.intro}</p>
 
       <div class="ledger">
         <div class="ledger-head mono">
           <span class="col-code"></span>
-          <span>{properties.columns[0]}</span>
-          <span>{properties.columns[1]}</span>
-          <span>{properties.columns[2]}</span>
+          <span>{verticals.columns[0]}</span>
+          <span>{verticals.columns[1]}</span>
+          <span>{verticals.columns[2]}</span>
         </div>
         {
-          properties.rows.map((r) => (
+          verticals.rows.map((r) => (
             <div class="ledger-row">
               <span class="col-code mono">{r.code}</span>
               <span class="col-name">{r.name}</span>
@@ -92,46 +92,11 @@ import { site, hero, overview, focus, properties, library, faq, contact, disclai
           ))
         }
       </div>
-      <p class="mono ledger-foot">{properties.footnote}</p>
+      <p class="mono ledger-foot">{verticals.footnote}</p>
     </div>
   </section>
 
-  <!-- 04 - Library / Reading Room -->
-  <section class="section" id="library">
-    <div class="container">
-      <div class="dot-row" aria-hidden="true"></div>
-      <p class="eyebrow">{library.eyebrow}</p>
-      <h2 class="display section-head">{library.headline}</h2>
-      <p class="lede section-intro">{library.intro}</p>
-
-      {
-        library.groups.map((g) => (
-          <div class="lib-group">
-            <p class="lib-label mono">{g.label}</p>
-            <ul class="lib-list">
-              {g.items.map((it) =>
-                'href' in it && it.href ? (
-                  <li class="lib-item">
-                    <a class="lib-row" href={it.href} target="_blank" rel="noopener">
-                      <span class="lib-title">{it.title}</span>
-                      <span class="lib-meta mono">{it.meta} ↗</span>
-                    </a>
-                  </li>
-                ) : (
-                  <li class="lib-item lib-item--static">
-                    <span class="lib-title">{it.title}</span>
-                    <span class="lib-meta mono">{it.meta}</span>
-                  </li>
-                )
-              )}
-            </ul>
-          </div>
-        ))
-      }
-    </div>
-  </section>
-
-  <!-- 05 - FAQ -->
+  <!-- 04 - FAQ -->
   <section class="section" id="faq">
     <div class="container reading">
       <div class="dot-row" aria-hidden="true"></div>
@@ -160,7 +125,7 @@ import { site, hero, overview, focus, properties, library, faq, contact, disclai
     </div>
   </section>
 
-  <!-- 06 - Get in touch -->
+  <!-- 05 - Get involved -->
   <section class="section contact dot-field" id="contact">
     <div class="container reading">
       <div class="dot-row" aria-hidden="true"></div>
@@ -169,15 +134,6 @@ import { site, hero, overview, focus, properties, library, faq, contact, disclai
       <p class="prose">{contact.body}</p>
       <a class="contact-email" href={`mailto:${site.email}`}>{site.email.toUpperCase()} <span class="arrow">→</span></a>
       <p class="mono contact-note">{contact.note}</p>
-    </div>
-  </section>
-
-  <!-- 07 - Disclaimer -->
-  <section class="section" id="disclaimer">
-    <div class="container reading">
-      <p class="eyebrow">{disclaimer.eyebrow}</p>
-      <h2 class="display disclaimer-head">{disclaimer.headline}</h2>
-      <p class="prose disclaimer-body">{disclaimer.body}</p>
     </div>
   </section>
 
@@ -235,7 +191,7 @@ import { site, hero, overview, focus, properties, library, faq, contact, disclai
       margin-top: 28px;
     }
 
-    /* Focus cards - ruled cells, no fill */
+    /* Pillar cards - ruled cells, no fill */
     .cards {
       margin-top: 40px;
       display: grid;
@@ -274,7 +230,7 @@ import { site, hero, overview, focus, properties, library, faq, contact, disclai
       letter-spacing: 0.1em;
     }
 
-    /* Properties ledger - hairline-ruled table, no fills */
+    /* Verticals ledger - hairline-ruled table, no fills */
     .ledger {
       margin-top: 40px;
       border-top: 1px solid var(--text);
@@ -282,7 +238,7 @@ import { site, hero, overview, focus, properties, library, faq, contact, disclai
     .ledger-head,
     .ledger-row {
       display: grid;
-      grid-template-columns: 52px 1.1fr 2.3fr 1.4fr;
+      grid-template-columns: 52px 1.3fr 2.3fr 1.3fr;
       gap: 24px;
       align-items: baseline;
       padding: 20px 4px;
@@ -321,58 +277,6 @@ import { site, hero, overview, focus, properties, library, faq, contact, disclai
       margin-top: 18px;
       letter-spacing: 0.1em;
       font-size: 11px;
-    }
-
-    /* Library / reading room */
-    .lib-group {
-      margin-top: 44px;
-    }
-    .lib-label {
-      letter-spacing: 0.16em;
-      font-size: 11px;
-      margin: 0 0 10px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--text);
-    }
-    .lib-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-    .lib-item,
-    .lib-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      gap: 24px;
-      padding: 16px 2px;
-      border-bottom: 1px solid var(--line);
-    }
-    .lib-row {
-      padding: 0;
-      border: 0;
-      width: 100%;
-    }
-    .lib-title {
-      font-size: 18px;
-      overflow-wrap: anywhere;
-    }
-    .lib-meta {
-      font-size: 11px;
-      white-space: nowrap;
-      letter-spacing: 0.08em;
-      text-align: right;
-    }
-    .lib-row .lib-title {
-      background-image: linear-gradient(currentColor, currentColor);
-      background-size: 0% 1px;
-      background-repeat: no-repeat;
-      background-position: 0 100%;
-      transition: background-size 0.16s ease;
-      padding-bottom: 1px;
-    }
-    .lib-row:hover .lib-title {
-      background-size: 100% 1px;
     }
 
     /* FAQ */
@@ -467,7 +371,8 @@ import { site, hero, overview, focus, properties, library, faq, contact, disclai
       transition: background-size 0.18s ease;
       padding-bottom: 3px;
     }
-    .contact-email:hover {
+    .contact-email:hover,
+    .contact-email:focus-visible {
       background-size: 100% 1.5px;
     }
     .contact-email .arrow {
@@ -476,18 +381,6 @@ import { site, hero, overview, focus, properties, library, faq, contact, disclai
     .contact-note {
       margin-top: 26px;
       letter-spacing: 0.14em;
-    }
-
-    /* Disclaimer */
-    .disclaimer-head {
-      font-size: clamp(28px, 4vw, 40px);
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      margin-top: 14px;
-    }
-    .disclaimer-body {
-      color: var(--text-secondary);
-      font-size: 17px;
     }
 
     @media (max-width: 760px) {
@@ -521,16 +414,6 @@ import { site, hero, overview, focus, properties, library, faq, contact, disclai
       .col-note {
         grid-area: note;
         margin-top: 4px;
-      }
-      .lib-item,
-      .lib-row {
-        flex-direction: column;
-        gap: 6px;
-      }
-      .lib-meta {
-        text-align: left;
-        white-space: normal;
-        overflow-wrap: anywhere;
       }
     }
   </style>

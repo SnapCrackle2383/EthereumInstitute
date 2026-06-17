@@ -1,6 +1,8 @@
 // All site copy lives here so it can be edited in one place.
-// Announcement / placeholder cut: evergreen, mission-led, no hard figures,
-// no named third parties, no logos. Strictly within the pq.ethereum.org token system.
+// Positioning: the Ethereum Institute is a coordination platform for INSTITUTIONAL
+// ADOPTION on Ethereum (not a research body). Standalone brand: no Ethereum
+// Foundation affiliation is claimed or denied. Announcement / in-formation cut:
+// evergreen, no hard figures, no named third parties, no membership-tier detail.
 // House style: no em dashes.
 
 export const site = {
@@ -9,211 +11,171 @@ export const site = {
   domain: 'ethinstitute.org',
   email: 'hello@ethinstitute.org',
   established: '2026',
-  title: 'Ethereum Institute: Independent research and education',
+  title: 'Ethereum Institute: Coordinating institutional adoption on Ethereum',
   description:
-    'An independent research and education body for the institutions building on Ethereum. We study the onchain economy and publish what we learn as a public good.',
+    'A coordination platform for institutional adoption on Ethereum, tying market access, knowledge, open standards, and implementation into one place.',
 } as const;
 
 export const nav = [
   { label: 'ABOUT', href: '#overview' },
-  { label: 'RESEARCH', href: '#research-focus' },
-  { label: 'LIBRARY', href: '#library' },
+  { label: 'PILLARS', href: '#pillars' },
+  { label: 'VERTICALS', href: '#verticals' },
   { label: 'FAQ', href: '#faq' },
   { label: 'CONTACT', href: '#contact' },
 ] as const;
 
 export const hero = {
-  eyebrow: 'ETHEREUM INSTITUTE · INDEPENDENT RESEARCH',
-  headline: 'Institutional Ethereum, studied in the open.',
-  lede: 'A research and education body for the institutions building on Ethereum. We study how the onchain economy is being assembled (the assets, the settlement, the safeguards) and publish what we learn as a public good, plainly and without a side to sell.',
+  eyebrow: 'ETHEREUM INSTITUTE · INSTITUTIONAL ADOPTION',
+  headline: 'Ethereum’s institutional adoption layer.',
+  lede: 'The Ethereum Institute is a coordination platform for Ethereum’s next phase of ecosystem growth. It ties market access, knowledge, coordination, and implementation into one place, turning protocol credibility into structured adoption pathways for institutions.',
   links: [
-    { label: 'Read the research', href: '#research-focus', arrow: '→' },
-    { label: 'Browse the library', href: '#library', arrow: '→' },
+    { label: 'See what we do', href: '#pillars', arrow: '→' },
+    { label: 'Priority verticals', href: '#verticals', arrow: '→' },
     { label: 'Explore the FAQ', href: '#faq', arrow: '→' },
     { label: 'Get in touch', href: '#contact', arrow: '↗' },
   ],
-  dateline: 'ESTABLISHED 2026 · RESEARCH FORTHCOMING · FOR INSTITUTIONAL READERS',
+  dateline: 'ESTABLISHED 2026 · IN FORMATION · FOR INSTITUTIONAL READERS',
 } as const;
 
 export const overview = {
   eyebrow: 'OVERVIEW',
-  headline: 'Why an institute, and why now',
+  headline: 'Coordinated adoption, not one firm at a time',
   body: [
-    'Ethereum has run without interruption for years, settling value through a long sequence of network upgrades with no coordinated downtime. That record is no longer a curiosity for institutions; it is the reason serious capital is moving onchain. Tokenized treasuries, regulated stablecoins, and exchange-traded products are being issued and settled on a network that nobody owns and nobody can pause.',
-    'The Ethereum Institute exists to help institutional readers understand that shift on its own terms. We are not a vendor, a foundation, or a chain. We are a small research body that reads the primary sources, talks to the people building, and writes it down clearly. Our work is open, our methods are stated, and our conclusions are ours to defend.',
+    'Ethereum has earned its credibility at the protocol layer. The harder problem now is coordination: helping institutions, infrastructure providers, fintechs, service firms, and builders move in the same direction, on shared standards, instead of solving the same adoption problems firm by firm.',
+    'The Ethereum Institute is built for that. It is a single platform that turns scattered institutional interest into standards, frameworks, and live deployments. The aim is to lower the friction of entering, building on, and trusting Ethereum as foundational infrastructure for digital finance.',
   ],
   links: [
-    { label: 'View research focus areas', href: '#research-focus', arrow: '→' },
-    { label: 'Read our disclaimer', href: '#disclaimer', arrow: '→' },
+    { label: 'See what we do', href: '#pillars', arrow: '→' },
+    { label: 'Get involved', href: '#contact', arrow: '→' },
   ],
 } as const;
 
-export const focus = {
-  eyebrow: 'RESEARCH FOCUS',
-  headline: 'Four areas under study',
+export const pillars = {
+  eyebrow: 'WHAT WE DO',
+  headline: 'Four pillars, one platform',
   intro:
-    'Institutional adoption is not one question but several, each unfolding at its own pace. We organize our work around the four areas where the most consequential decisions are being made.',
+    'The Institute ties four layers into one coordination platform. Membership is the wrapper, working groups are the engine, and standards, content, and events carry the work to the wider market.',
   areas: [
     {
-      code: 'F·01',
-      title: 'Real-World Assets & Stablecoins',
-      body: 'Offchain value (treasuries, credit, commodities, money itself) is being issued as onchain tokens. We track who is tokenizing, on what terms, and how settlement and redemption actually work.',
-      track: 'WE TRACK: ISSUANCE · REDEMPTION · RESERVES',
+      code: '01',
+      title: 'Market Access',
+      body: 'Connects institutions, infrastructure, fintechs, service firms, and builders into one network, so demand, supply, and the firms in between can find each other.',
+      track: 'ONE NETWORK · CROSS-SECTOR',
     },
     {
-      code: 'F·02',
-      title: 'Decentralized Finance',
-      body: 'Open, contract-based markets let institutions lend, borrow, and trade without an intermediary holding the book. We study the mechanics, the risks, and the line between composability and exposure.',
-      track: 'WE TRACK: MARKET STRUCTURE · RISK · YIELD',
+      code: '02',
+      title: 'Knowledge Production',
+      body: 'Research, briefings, case studies, and market maps that make Ethereum legible to institutions and reusable across the ecosystem.',
+      track: 'RESEARCH · BRIEFINGS · MARKET MAPS',
     },
     {
-      code: 'F·03',
-      title: 'Privacy & Compliance',
-      body: 'A public ledger and confidential operations are not opposites. We examine the privacy techniques and compliance patterns that let regulated entities transact onchain without disclosing everything to everyone.',
-      track: 'WE TRACK: PRIVACY · CONTROLS · DISCLOSURE',
+      code: '03',
+      title: 'Coordination',
+      body: 'Working groups and open frameworks that turn shared problems into shared standards, where adoption needs alignment across the ecosystem.',
+      track: 'WORKING GROUPS · OPEN STANDARDS',
     },
     {
-      code: 'F·04',
-      title: 'The Layer-2 Ecosystem',
-      body: 'Most institutional activity will not sit on mainnet alone. We map the rollups and their trust assumptions, so readers can tell where settlement finality actually lives.',
-      track: 'WE TRACK: ROLLUPS · BRIDGES · FINALITY',
+      code: '04',
+      title: 'Implementation',
+      body: 'Playbooks, reference architectures, and partner pathways that move members from early interest to production deployment on Ethereum.',
+      track: 'PLAYBOOKS · PILOTS · DEPLOYMENT',
     },
   ],
 } as const;
 
-export const properties = {
-  eyebrow: 'THE PROPERTIES',
-  headline: 'Six properties institutions underwrite',
+export const verticals = {
+  eyebrow: 'PRIORITY VERTICALS',
+  headline: 'Where the work focuses',
   intro:
-    'When an institution chooses a settlement layer, it is choosing a set of properties it cannot easily change later. The case for Ethereum is cumulative. No single property is decisive; together they describe infrastructure that is hard to replicate and harder to switch off.',
-  columns: ['PROPERTY', 'WHAT IT MEANS', 'WHY IT HOLDS'],
+    'Six clusters where coordination failures are most expensive, and where Ethereum’s neutrality makes the Institute a better convener than any single firm.',
+  columns: ['VERTICAL', 'WHAT IT COVERS', 'FOCUS'],
   rows: [
     {
-      code: 'P1',
-      name: 'Resilience',
-      meaning: 'Continuous operation under real-world load, across many upgrades, with no coordinated downtime.',
-      note: 'CONTINUOUS LIVENESS',
+      code: '01',
+      name: 'Digital Assets & Tokenization',
+      meaning: 'Funds, bonds, private assets, issuance rails, and lifecycle servicing.',
+      note: 'ISSUANCE & SERVICING',
     },
     {
-      code: 'P2',
-      name: 'Credible Neutrality',
-      meaning: 'No owner, no central coordinator, no pause button. The rules apply equally, or not at all.',
-      note: 'NO SINGLE POINT OF CONTROL',
+      code: '02',
+      name: 'Payments & Stablecoins',
+      meaning: 'Settlement, treasury, merchant and payments infrastructure, and cross-border flows.',
+      note: 'SETTLEMENT & FLOWS',
     },
     {
-      code: 'P3',
-      name: 'Decentralization',
-      meaning: 'Economic security distributed across the world makes the network costly to attack and hard to capture.',
-      note: 'GLOBALLY DISTRIBUTED SECURITY',
+      code: '03',
+      name: 'Institutional DeFi',
+      meaning: 'Access models, risk controls, permissioning, reporting, and liquidity frameworks.',
+      note: 'ACCESS & RISK',
     },
     {
-      code: 'P4',
-      name: 'Deep Liquidity',
-      meaning: 'Markets are continuous and globally accessible, not dependent on a single venue or set of hours.',
-      note: 'ALWAYS-ON MARKETS',
+      code: '04',
+      name: 'Core Infrastructure',
+      meaning: 'Custody, wallets, staking, Layer 2s, RaaS, data, and oracles.',
+      note: 'CUSTODY & RAILS',
     },
     {
-      code: 'P5',
-      name: 'Flexibility',
-      meaning: 'Open source, with freedom of stack and vendor. No lock-in to a single provider.',
-      note: 'OPEN SOURCE · NO LOCK-IN',
+      code: '05',
+      name: 'Market Structure',
+      meaning: 'Execution, transparency, reporting, benchmarks, and liquidity models.',
+      note: 'EXECUTION & DATA',
     },
     {
-      code: 'P6',
-      name: 'Tokenization',
-      meaning: 'A leading venue for issuing onchain real-world assets and dollar-denominated value.',
-      note: 'ISSUANCE AT THE BASE LAYER',
+      code: '06',
+      name: 'Policy & Controls',
+      meaning: 'Compliance, attestations, privacy, legal structure, and regulator engagement.',
+      note: 'COMPLIANCE & POLICY',
     },
   ],
-  footnote: 'A CUMULATIVE CASE. NO SINGLE PROPERTY IS DECISIVE; TOGETHER THEY ARE HARD TO REPLICATE.',
-} as const;
-
-export const library = {
-  eyebrow: 'LIBRARY',
-  headline: 'The reading room',
-  intro:
-    'The evidence for everything above, gathered in one place. Where the work is ours, it is open and free to read; where we lean on someone else’s, we link to it directly. Our own papers are in preparation, listed here so you know what is coming.',
-  groups: [
-    {
-      label: 'INSTITUTE PAPERS',
-      items: [
-        { title: 'The Institutional Liquidity Layer: A Primer', meta: 'FORTHCOMING · 2026' },
-        { title: 'Tokenized Treasuries: Issuance, Custody, and Redemption', meta: 'FORTHCOMING · 2026' },
-        { title: 'Stablecoins as Settlement: A Reference Architecture', meta: 'FORTHCOMING · 2026' },
-        { title: 'Reading a Rollup: A Field Guide to L2 Trust Assumptions', meta: 'FORTHCOMING · 2026' },
-      ],
-    },
-    {
-      label: 'PRIMARY SOURCES',
-      items: [
-        { title: 'Ethereum Foundation: Institutional Resources', meta: 'institutions.ethereum.org', href: 'https://institutions.ethereum.org/' },
-        { title: 'Ethereum Protocol Roadmap', meta: 'ethereum.org/roadmap', href: 'https://ethereum.org/roadmap/' },
-        { title: 'Ethereum Research Forum', meta: 'ethresear.ch', href: 'https://ethresear.ch/' },
-        { title: 'Ethereum.org', meta: 'ethereum.org', href: 'https://ethereum.org/' },
-      ],
-    },
-  ],
+  footnote: 'SIX CLUSTERS WHERE A NEUTRAL CONVENER CAN DO WHAT NO SINGLE FIRM CAN.',
 } as const;
 
 export const faq = {
   eyebrow: 'FREQUENTLY ASKED QUESTIONS',
   headline: 'Frequently asked questions',
   disclaimer:
-    'These answers reflect the Institute’s current research and assessment as of early 2026, written for readers evaluating Ethereum at an institutional level. They are educational, not investment, legal, or regulatory advice. We are an independent research body, not a part of the Ethereum protocol, the Ethereum Foundation, or any organization referenced on this page. Where the honest answer is “it depends,” we say so.',
+    'The Ethereum Institute is in formation. This page is an early outline of its direction and will evolve as the work begins. Nothing here is investment, legal, or regulatory advice.',
   groups: [
     {
-      label: 'UNDERSTANDING THE LANDSCAPE',
+      label: 'ABOUT THE INSTITUTE',
       items: [
         {
-          q: 'What does “the institutional liquidity layer” actually mean, and is credible neutrality a feature or a constraint?',
-          a: 'It is shorthand for a simple claim: that Ethereum is becoming the base layer where institutional value is issued, traded, and settled onchain. The phrase describes a direction of travel, not a finished state. The property underneath it, credible neutrality, is both a feature and a constraint, and the two are inseparable. The network will not bend its rules for a large participant, which is exactly why a large participant can rely on it.',
+          q: 'What is the Ethereum Institute?',
+          a: 'A coordination platform for institutional adoption on Ethereum. It ties market access, knowledge, coordination, and implementation into one place, turning Ethereum’s protocol credibility into structured adoption pathways for institutions.',
         },
         {
-          q: 'Is Ethereum a company, and who is in charge of it?',
-          a: 'No. Ethereum is a public network with no owner, no chief executive, and no central operator. Changes are proposed, debated, and adopted through open processes among independent client teams, researchers, and the wider community. That absence of a controlling party is precisely the property institutions describe as credible neutrality.',
+          q: 'Is this a research organization?',
+          a: 'No. Knowledge production is one of four things we do, alongside market access, coordination, and implementation. Research and briefings exist to support adoption, not as an end in themselves. The point is to help institutions move from interest to deployment.',
         },
         {
-          q: 'How is this Institute funded, and whose interests does it serve?',
-          a: 'We are funded to produce open research, and we disclose our sources of support. We serve the reader, not an issuer. When we hold a position, we argue for it in the open and invite correction. We have no token, no fund, and nothing to sell.',
+          q: 'Who is it for?',
+          a: 'Institutions, infrastructure providers, fintechs, service firms, and builders. The aim is to bring demand, supply, infrastructure, and control functions into one network, because no single actor can coordinate institutional adoption alone.',
         },
       ],
     },
     {
-      label: 'ASSETS & SETTLEMENT',
+      label: 'HOW IT WORKS',
       items: [
         {
-          q: 'What is a tokenized real-world asset, in plain terms?',
-          a: 'It is a claim on an offchain asset, such as a treasury bill, a fund share, or a unit of credit, recorded and transferable as a token onchain. The token does not replace the legal asset; it represents ownership of it, and lets that ownership move, settle, and compose with other onchain systems at the speed of the network.',
+          q: 'How does the Institute create value?',
+          a: 'Through working groups and open frameworks that turn shared problems into shared standards, knowledge that makes Ethereum legible to institutions, events that build momentum, and implementation pathways that move members from interest to live deployment.',
         },
         {
-          q: 'Where does settlement actually become final?',
-          a: 'Not always where you think. Activity on a Layer-2 network is final on that network quickly, but inherits Ethereum’s strongest guarantees only once settled to mainnet. Understanding where finality lives, and the trust assumptions in between, is one of the most important and least understood parts of the picture. We devote a focus area to it.',
+          q: 'What does participation involve?',
+          a: 'Members join working groups, access research and events, and help shape open standards. Participation is structured around contribution rather than sponsorship size. The specifics are being finalized.',
         },
       ],
     },
     {
-      label: 'PRIVACY, COMPLIANCE & RISK',
+      label: 'GETTING INVOLVED',
       items: [
         {
-          q: 'Isn’t a public blockchain incompatible with confidentiality and compliance?',
-          a: 'Not necessarily. A public ledger makes transactions verifiable, but a growing set of privacy techniques lets institutions transact without disclosing every detail to the entire world. The harder work is fitting those techniques to real compliance obligations (reporting, controls, and lawful disclosure), and that fit is an active area of both research and regulation.',
+          q: 'How do I get involved?',
+          a: 'Write to us. We are convening early participants now, and we welcome institutions exploring Ethereum for production use as well as those who want to help shape the agenda.',
         },
         {
-          q: 'What are the principal risks an institution should weigh?',
-          a: 'The honest list is long: smart-contract risk, custody and key management, the backing and redeemability of stablecoins, the trust assumptions of any Layer-2 in use, and an unsettled regulatory environment that differs by jurisdiction. We do not minimize these. Our role is to make them legible so they can be assessed, not to wave them away.',
-        },
-      ],
-    },
-    {
-      label: 'USING THIS WORK',
-      items: [
-        {
-          q: 'Is anything on this site investment or legal advice?',
-          a: 'No. Everything we publish is educational research intended to inform your own analysis. It is not investment, legal, accounting, or regulatory advice, and it is not a recommendation to buy, sell, or hold any asset. Decisions, and the professional advice behind them, remain yours.',
-        },
-        {
-          q: 'How can my institution work with the Institute, or correct something?',
-          a: 'Write to us. We welcome briefings, requests for research, and corrections in equal measure. A flagged error is a contribution. Contact details are in the footer below.',
+          q: 'Is anything here final?',
+          a: 'No. The Institute is being scoped now, and this is an early statement of intent. Structure, workstreams, and specifics will sharpen as the first members come on board.',
         },
       ],
     },
@@ -221,16 +183,10 @@ export const faq = {
 } as const;
 
 export const contact = {
-  eyebrow: 'WORK WITH US',
-  headline: 'Bring us your hardest question.',
-  body: 'We work with treasurers, allocators, and risk teams evaluating Ethereum for production use. Tell us what you are weighing (a tokenization program, settlement on Ethereum, a board briefing) and we will route you to the people building it, or write the analysis ourselves.',
+  eyebrow: 'GET INVOLVED',
+  headline: 'Help shape Ethereum’s adoption layer.',
+  body: 'We are convening institutions, infrastructure providers, fintechs, service firms, and builders around shared standards and practical adoption. If your organization is exploring Ethereum for production use, or wants to help set the agenda, we would like to hear from you.',
   note: 'WE READ EVERY MESSAGE.',
-} as const;
-
-export const disclaimer = {
-  eyebrow: 'DISCLAIMER',
-  headline: 'What this is, and what it is not',
-  body: 'The Ethereum Institute is an independent research and education body. We are not affiliated with, endorsed by, or speaking for the Ethereum Foundation, any protocol team, or any company referenced on this site. Nothing here is investment, legal, tax, or regulatory advice, and nothing here is an offer or solicitation to buy or sell any asset. Onchain systems carry real and evolving risks; readers should seek their own professional advice. Our work reflects our research and judgment as of early 2026, and it will change as the evidence does.',
 } as const;
 
 export const footer = {
@@ -239,21 +195,20 @@ export const footer = {
       label: 'THE INSTITUTE',
       links: [
         { label: 'About', href: '#overview' },
-        { label: 'Mission', href: '#overview' },
+        { label: 'What We Do', href: '#pillars' },
         { label: 'FAQ', href: '#faq' },
         { label: 'Contact', href: '#contact' },
       ],
     },
     {
-      label: 'RESEARCH',
+      label: 'FOCUS',
       links: [
-        { label: 'Focus Areas', href: '#research-focus' },
-        { label: 'The Case for Ethereum', href: '#properties' },
-        { label: 'Library', href: '#library' },
+        { label: 'The Pillars', href: '#pillars' },
+        { label: 'Priority Verticals', href: '#verticals' },
       ],
     },
     {
-      label: 'PRIMARY SOURCES',
+      label: 'ECOSYSTEM',
       links: [
         { label: 'institutions.ethereum.org', href: 'https://institutions.ethereum.org/', external: true },
         { label: 'ethereum.org/roadmap', href: 'https://ethereum.org/roadmap/', external: true },
@@ -263,8 +218,8 @@ export const footer = {
     },
   ],
   baseline: [
-    'ETHINSTITUTE.ORG · INDEPENDENT RESEARCH & EDUCATION · ESTABLISHED 2026',
-    'OPEN RESEARCH, PUBLISHED AS A PUBLIC GOOD. NOT INVESTMENT OR LEGAL ADVICE.',
+    'ETHINSTITUTE.ORG · INSTITUTIONAL ADOPTION ON ETHEREUM · ESTABLISHED 2026',
+    'IN FORMATION. NOTHING HERE IS INVESTMENT OR LEGAL ADVICE.',
     'CONTACT: HELLO@ETHINSTITUTE.ORG',
   ],
 } as const;
