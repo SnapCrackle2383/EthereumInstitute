@@ -157,17 +157,21 @@ nav.scrolled::after{opacity:.9}
 }
 .btn-nav:hover{background:var(--fg);color:var(--bg)}
 
-/* ═══ MISSION PAGE LAYOUT ═══ */
+/* ═══ MISSION PAGE LAYOUT — mirrors the funding page rhythm ═══ */
 .mission-page{
   max-width:var(--max-content);
   margin:0 auto;
-  padding:calc(var(--nav-height-desktop) + 80px) clamp(20px,5vw,var(--pad-x-desktop)) calc(40px + var(--footer-height));
+  padding:calc(var(--nav-height-desktop) + 160px) clamp(20px,5vw,var(--pad-x-desktop)) calc(40px + var(--footer-height));
   position:relative;
   z-index:1;
 }
 
+/* h1 + lede stacked at the page's left edge, gap mirrors funding's intro-col */
 .mission-hero{
-  margin-bottom:80px;
+  display:flex;
+  flex-direction:column;
+  gap:48px;
+  margin-bottom:120px;
 }
 .page-title{
   font-family:var(--serif);
@@ -176,7 +180,7 @@ nav.scrolled::after{opacity:.9}
   line-height:1.05;
   letter-spacing:-.025em;
   color:var(--fg);
-  margin:0 0 20px;
+  margin:0;
   text-align:left;
 }
 .mission-lede{
@@ -185,20 +189,25 @@ nav.scrolled::after{opacity:.9}
   font-size:14.5px;
   line-height:1.6;
   color:var(--fg2);
-  max-width:560px;
+  max-width:480px;
   margin:0;
+  text-align:left;
 }
 
-/* Shared section atoms — match homepage */
-section{padding:clamp(56px,8vw,100px) 0;position:relative;z-index:1}
-.inner{max-width:920px;margin:0 auto;padding:0 clamp(0px,2vw,12px)}
+/* Dividers span the full mission-page width — same as funding-divider */
+.mission-divider{
+  border:0;
+  border-top:1px solid var(--border);
+  margin:0 0 60px;
+}
+
+/* Sections sit flush left at the page edge (no centered .inner) */
+.mission-section{padding:0 0 60px}
 .s-label{font-family:var(--sans);font-size:9px;font-weight:500;letter-spacing:.5em;text-transform:uppercase;color:var(--fg3);margin-bottom:12px}
 .s-title{font-family:var(--serif);font-weight:400;font-size:clamp(26px,3.2vw,44px);line-height:1.12;letter-spacing:-.015em;margin-bottom:14px}
 .s-desc{font-weight:300;font-size:13.5px;color:var(--fg2);max-width:560px;line-height:1.6}
-.rule{height:1px;background:var(--border);max-width:920px;margin:0 auto}
 
 /* What We Do — archive-style list */
-.archive-section{padding-top:48px;padding-bottom:48px}
 .archive-list{margin-top:28px}
 .archive-item{display:flex;align-items:baseline;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border);transition:padding-left .25s;gap:16px}
 .archive-item:first-child{border-top:1px solid var(--border)}
@@ -232,13 +241,13 @@ footer{position:fixed;bottom:0;left:0;right:0;z-index:50;border-top:1px solid va
   nav.scrolled{padding:10px 20px}
 
   .mission-page{
-    padding:calc(var(--nav-height-mobile) + 24px) 20px calc(32px + var(--footer-height-mobile));
+    padding:calc(var(--nav-height-mobile) + 40px) 20px calc(32px + var(--footer-height-mobile));
   }
-  .mission-hero{margin-bottom:48px}
+  .mission-hero{gap:24px;margin-bottom:60px}
   .page-title{font-size:clamp(36px,10vw,48px)}
 
-  section{padding:36px 0}
-  .archive-section{padding-top:36px;padding-bottom:36px}
+  .mission-divider{margin:0 0 36px}
+  .mission-section{padding:0 0 36px}
 
   .archive-item{flex-direction:column;gap:4px;align-items:flex-start;padding:12px 0}
   .archive-item h3{font-size:15px}
@@ -274,68 +283,64 @@ footer{position:fixed;bottom:0;left:0;right:0;z-index:50;border-top:1px solid va
 </nav>
 
 <main class="mission-page">
-  <div class="inner mission-hero fu d1">
+  <div class="mission-hero fu d1">
     <h1 class="page-title">Mission</h1>
     <p class="mission-lede">An independent non-profit dedicated to accelerating the institutional adoption of Ethereum, its L2s, applications and overall ecosystem.</p>
   </div>
 
-  <div class="rule"></div>
+  <hr class="mission-divider">
 
-  <section id="activities" class="archive-section" aria-labelledby="activities-title">
-    <div class="inner reveal">
-      <div class="s-label">What We Do</div>
-      <h2 class="s-title" id="activities-title">Five Key Focus Areas</h2>
-      <div class="archive-list">
-        <div class="archive-item">
-          <div class="archive-title-wrap" style="flex-direction:column;align-items:flex-start;gap:0">
-            <h3>Institutional Education &amp; Engagement</h3>
-            <p class="archive-desc">Structured programs for Tier-1 banks, asset managers, custodians, and sovereign institutions. Measured by high-quality institutional engagements and concrete wins for Ethereum, including production deployments, pilots, and committed roadmaps.</p>
-          </div>
-          <span class="archive-date">Engagement</span>
+  <section id="activities" class="mission-section reveal" aria-labelledby="activities-title">
+    <div class="s-label">What We Do</div>
+    <h2 class="s-title" id="activities-title">Five Key Focus Areas</h2>
+    <div class="archive-list">
+      <div class="archive-item">
+        <div class="archive-title-wrap" style="flex-direction:column;align-items:flex-start;gap:0">
+          <h3>Institutional Education &amp; Engagement</h3>
+          <p class="archive-desc">Structured programs for Tier-1 banks, asset managers, custodians, and sovereign institutions. Measured by high-quality institutional engagements and concrete wins for Ethereum, including production deployments, pilots, and committed roadmaps.</p>
         </div>
-        <div class="archive-item">
-          <div class="archive-title-wrap" style="flex-direction:column;align-items:flex-start;gap:0">
-            <h3>Institutional Intelligence</h3>
-            <p class="archive-desc">Systematic mapping of institutional onchain activity and pipelines, with requirements and feedback gathered from institutions and routed to the teams building Ethereum and its ecosystem.</p>
-          </div>
-          <span class="archive-date">Research</span>
+        <span class="archive-date">Engagement</span>
+      </div>
+      <div class="archive-item">
+        <div class="archive-title-wrap" style="flex-direction:column;align-items:flex-start;gap:0">
+          <h3>Institutional Intelligence</h3>
+          <p class="archive-desc">Systematic mapping of institutional onchain activity and pipelines, with requirements and feedback gathered from institutions and routed to the teams building Ethereum and its ecosystem.</p>
         </div>
-        <div class="archive-item">
-          <div class="archive-title-wrap" style="flex-direction:column;align-items:flex-start;gap:0">
-            <h3>ETH &amp; Ecosystem Marketing</h3>
-            <p class="archive-desc">Coordinated communications that position ETH as the leading institutional asset and promote institutional adoption across the broader Ethereum ecosystem, highlighting concrete deployments, partnerships, and new use cases.</p>
-          </div>
-          <span class="archive-date">Marketing</span>
+        <span class="archive-date">Research</span>
+      </div>
+      <div class="archive-item">
+        <div class="archive-title-wrap" style="flex-direction:column;align-items:flex-start;gap:0">
+          <h3>ETH &amp; Ecosystem Marketing</h3>
+          <p class="archive-desc">Coordinated communications that position ETH as the leading institutional asset and promote institutional adoption across the broader Ethereum ecosystem, highlighting concrete deployments, partnerships, and new use cases.</p>
         </div>
-        <div class="archive-item">
-          <div class="archive-title-wrap" style="flex-direction:column;align-items:flex-start;gap:0">
-            <h3>Standards &amp; Best Practices</h3>
-            <p class="archive-desc">Practical frameworks institutions can rely on when they design, integrate, operate, custody, issue, and settle on Ethereum. Open, neutral, and shaped by the institutions that use them.</p>
-          </div>
-          <span class="archive-date">Standards</span>
+        <span class="archive-date">Marketing</span>
+      </div>
+      <div class="archive-item">
+        <div class="archive-title-wrap" style="flex-direction:column;align-items:flex-start;gap:0">
+          <h3>Standards &amp; Best Practices</h3>
+          <p class="archive-desc">Practical frameworks institutions can rely on when they design, integrate, operate, custody, issue, and settle on Ethereum. Open, neutral, and shaped by the institutions that use them.</p>
         </div>
-        <div class="archive-item">
-          <div class="archive-title-wrap" style="flex-direction:column;align-items:flex-start;gap:0">
-            <h3>Institutional Events</h3>
-            <p class="archive-desc">Flagship events and focused working groups that put institutions and the Ethereum ecosystem in the same room, on neutral ground. The Institutional Ethereum Forum convenes in New York and Hong Kong.</p>
-          </div>
-          <span class="archive-date">Events</span>
+        <span class="archive-date">Standards</span>
+      </div>
+      <div class="archive-item">
+        <div class="archive-title-wrap" style="flex-direction:column;align-items:flex-start;gap:0">
+          <h3>Institutional Events</h3>
+          <p class="archive-desc">Flagship events and focused working groups that put institutions and the Ethereum ecosystem in the same room, on neutral ground. The Institutional Ethereum Forum convenes in New York and Hong Kong.</p>
         </div>
+        <span class="archive-date">Events</span>
       </div>
     </div>
   </section>
 
-  <div class="rule"></div>
+  <hr class="mission-divider">
 
-  <section id="coverage" aria-labelledby="coverage-title">
-    <div class="inner reveal">
-      <div class="s-label">Who We Serve</div>
-      <h2 class="s-title" id="coverage-title">Across the Institutional Stack</h2>
-      <p class="s-desc">Every layer of the institutional ecosystem evaluating Ethereum, from balance-sheet allocators to market infrastructure.</p>
-      <div class="cov-grid">
-        <span class="cov-pill">Banks</span><span class="cov-pill">Asset Managers</span><span class="cov-pill">Custodians</span><span class="cov-pill">Market Infrastructure</span>
-        <span class="cov-pill">Fintechs</span><span class="cov-pill">Sovereign Institutions</span><span class="cov-pill">Regulators</span><span class="cov-pill">Exchanges</span>
-      </div>
+  <section id="coverage" class="mission-section reveal" aria-labelledby="coverage-title">
+    <div class="s-label">Who We Serve</div>
+    <h2 class="s-title" id="coverage-title">Across the Institutional Stack</h2>
+    <p class="s-desc">Every layer of the institutional ecosystem evaluating Ethereum, from balance-sheet allocators to market infrastructure.</p>
+    <div class="cov-grid">
+      <span class="cov-pill">Banks</span><span class="cov-pill">Asset Managers</span><span class="cov-pill">Custodians</span><span class="cov-pill">Market Infrastructure</span>
+      <span class="cov-pill">Fintechs</span><span class="cov-pill">Sovereign Institutions</span><span class="cov-pill">Regulators</span><span class="cov-pill">Exchanges</span>
     </div>
   </section>
 </main>
