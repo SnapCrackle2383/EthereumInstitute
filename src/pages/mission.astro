@@ -166,13 +166,17 @@ nav.scrolled::after{opacity:.9}
   z-index:1;
 }
 
-/* h1 + lede stacked at the page's left edge, gap mirrors funding's intro-col */
-.mission-hero{
-  display:flex;
-  flex-direction:column;
-  gap:48px;
+/* Hero — copied 1:1 from funding's intro-grid/intro-col so the h1 lands in
+   the exact same containing-block chain. Single column here (no right-side
+   contribute box on /mission), but otherwise byte-identical to funding. */
+.intro-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:clamp(32px,4vw,60px);
+  align-items:start;
   margin-bottom:120px;
 }
+.intro-col{display:flex;flex-direction:column;gap:48px;min-width:0}
 .page-title{
   font-family:var(--serif);
   font-weight:400;
@@ -183,16 +187,17 @@ nav.scrolled::after{opacity:.9}
   margin:0;
   text-align:left;
 }
-.mission-lede{
+.intro-text p{
   font-family:var(--sans);
   font-weight:300;
   font-size:14.5px;
   line-height:1.6;
   color:var(--fg2);
+  margin:0 0 10px;
   max-width:480px;
-  margin:0;
   text-align:left;
 }
+.intro-text p:last-child{margin-bottom:0}
 
 /* Dividers span the full mission-page width — same as funding-divider */
 .mission-divider{
@@ -243,7 +248,8 @@ footer{position:fixed;bottom:0;left:0;right:0;z-index:50;border-top:1px solid va
   .mission-page{
     padding:calc(var(--nav-height-mobile) + 40px) 20px calc(32px + var(--footer-height-mobile));
   }
-  .mission-hero{gap:24px;margin-bottom:60px}
+  .intro-grid{gap:24px;margin-bottom:60px}
+  .intro-col{gap:20px}
   .page-title{font-size:clamp(36px,10vw,48px)}
 
   .mission-divider{margin:0 0 36px}
@@ -283,10 +289,14 @@ footer{position:fixed;bottom:0;left:0;right:0;z-index:50;border-top:1px solid va
 </nav>
 
 <main class="mission-page">
-  <div class="mission-hero fu d1">
-    <h1 class="page-title">Mission</h1>
-    <p class="mission-lede">An independent non-profit dedicated to accelerating the institutional adoption of Ethereum, its L2s, applications and overall ecosystem.</p>
-  </div>
+  <section class="intro-grid">
+    <div class="intro-col fu d1">
+      <h1 class="page-title">Mission</h1>
+      <div class="intro-text">
+        <p>An independent non-profit dedicated to accelerating the institutional adoption of Ethereum, its L2s, applications and overall ecosystem.</p>
+      </div>
+    </div>
+  </section>
 
   <hr class="mission-divider">
 
