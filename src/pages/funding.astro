@@ -171,9 +171,9 @@ nav.scrolled::after{opacity:.9}
 }
 .theme-toggle:hover{opacity:.95}
 .theme-toggle svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-.theme-moon{display:block}.theme-sun{display:none}
-[data-theme="light"] .theme-moon{display:none}
-[data-theme="light"] .theme-sun{display:block}
+.theme-moon{display:none}.theme-sun{display:block}
+[data-theme="light"] .theme-moon{display:block}
+[data-theme="light"] .theme-sun{display:none}
 
 .btn-nav{
   font-family:var(--sans);font-size:10px;font-weight:500;
@@ -221,7 +221,7 @@ footer{position:fixed;bottom:0;left:0;right:0;z-index:50;border-top:1px solid va
 .funding-page{
   max-width:var(--max-content);
   margin:0 auto;
-  padding:calc(var(--nav-height-desktop) + 80px) clamp(20px,5vw,var(--pad-x-desktop)) calc(40px + var(--footer-height));
+  padding:calc(var(--nav-height-desktop) + 160px) clamp(20px,5vw,var(--pad-x-desktop)) calc(40px + var(--footer-height));
   position:relative;
   z-index:1;
 }
@@ -355,12 +355,15 @@ footer{position:fixed;bottom:0;left:0;right:0;z-index:50;border-top:1px solid va
   text-align:left;
 }
 
-/* Dividers */
+/* Dividers — first divider (intro → anchor) keeps generous breathing room;
+   second divider (anchor → community) tightens up to lift the Community Round. */
 .funding-divider{
   border:0;
   border-top:1px solid var(--border);
   margin:120px 0;
 }
+.funding-divider:first-of-type{margin:100px 0 80px}
+.funding-divider:last-of-type{margin:60px 0 60px}
 
 /* Anchor + Community section labels */
 .funding-label{
@@ -370,7 +373,7 @@ footer{position:fixed;bottom:0;left:0;right:0;z-index:50;border-top:1px solid va
   letter-spacing:.18em;
   text-transform:uppercase;
   color:var(--fg3);
-  margin-bottom:40px;
+  margin-bottom:24px;
   text-align:left;
 }
 
