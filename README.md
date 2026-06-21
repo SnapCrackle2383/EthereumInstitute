@@ -2,7 +2,7 @@
 
 The website for the Ethereum Institute — an independent hub for research and
 education in the Ethereum ecosystem. Built with [Astro](https://astro.build),
-deployed to GitHub Pages, and served at **[ethinstitute.org](https://ethinstitute.org)**.
+deployed to GitHub Pages, and served at **[ethereuminstitutional.org](https://ethereuminstitutional.org)**.
 
 ## Develop
 
