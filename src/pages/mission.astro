@@ -209,16 +209,27 @@ nav.scrolled::after{opacity:.9}
 .intro-text p:last-child{margin-bottom:0}
 .intro-text strong{font-weight:500;color:var(--fg)}
 
-/* Scroll-scrubbed word reveal — applied per-word by JS on load.
-   Words start dim, brighten left-to-right as the prose passes through
-   the viewport. Bidirectional (scrolling back up reverses). */
-.intro-text .reveal-word{
-  opacity:.15;
-  transition:opacity .3s ease-out;
+/* Scroll-scrubbed sweep reveal on the prose. A vertical mask gradient
+   slides down the prose as the user scrolls: content above the
+   viewport's reading line renders at full opacity; content below sits
+   dim. The transition band between the two is ~12% of the prose
+   height, so the boundary reads as a smooth gradient rather than a
+   line. Bidirectional - scrolling back up reverses the sweep. */
+.intro-text{
+  --reveal-pct:0%;
+  -webkit-mask-image:linear-gradient(to bottom,
+    #000 0%,
+    #000 var(--reveal-pct),
+    rgba(0,0,0,.15) calc(var(--reveal-pct) + 12%),
+    rgba(0,0,0,.15) 100%);
+  mask-image:linear-gradient(to bottom,
+    #000 0%,
+    #000 var(--reveal-pct),
+    rgba(0,0,0,.15) calc(var(--reveal-pct) + 12%),
+    rgba(0,0,0,.15) 100%);
 }
-.intro-text .reveal-word.lit{opacity:1}
 @media(prefers-reduced-motion:reduce){
-  .intro-text .reveal-word{opacity:1;transition:none}
+  .intro-text{-webkit-mask-image:none;mask-image:none}
 }
 
 /* Dividers span the full mission-page width — same as funding-divider */
@@ -419,56 +430,28 @@ window.addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(()=>{na
 const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.1});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-/* ═══ Scroll-scrubbed word reveal on the mission prose ═══
-   Splits every word into its own span, then maps overall scroll
-   position through the .intro-text block to a "current word index".
-   Words 0..idx are lit, idx..end are dim. Diff-only updates so each
-   scroll frame only touches the words that crossed the threshold. */
+/* ═══ Scroll-scrubbed sweep reveal on the mission prose ═══
+   Drives a single CSS custom property (--reveal-pct) on .intro-text
+   from the scroll position. The CSS mask gradient does the rest -
+   no per-word DOM mutations, so it reads as a smooth continuous
+   sweep instead of a sequence of word transitions. */
 (function(){
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   const introText=document.querySelector('.intro-text');
   if(!introText)return;
 
-  introText.querySelectorAll('p').forEach(p=>{
-    const walker=document.createTreeWalker(p,NodeFilter.SHOW_TEXT);
-    const textNodes=[];
-    let node;
-    while((node=walker.nextNode())){if(node.textContent.trim())textNodes.push(node);}
-    textNodes.forEach(textNode=>{
-      const parts=textNode.textContent.split(/(\s+)/);
-      const frag=document.createDocumentFragment();
-      parts.forEach(part=>{
-        if(part==='')return;
-        if(/^\s+$/.test(part)){frag.appendChild(document.createTextNode(part));return;}
-        const span=document.createElement('span');
-        span.className='reveal-word';
-        span.textContent=part;
-        frag.appendChild(span);
-      });
-      textNode.parentNode.replaceChild(frag,textNode);
-    });
-  });
-
-  const words=introText.querySelectorAll('.reveal-word');
-  const total=words.length;
-  if(!total)return;
-
-  let lit=-1,scrubTicking=false;
+  let scrubTicking=false;
   function updateReveal(){
     scrubTicking=false;
     const rect=introText.getBoundingClientRect();
     const vh=window.innerHeight;
-    const range=vh+rect.height;
-    const passed=vh-rect.top;
-    const progress=Math.max(0,Math.min(1,passed/range));
-    const idx=Math.floor(progress*total);
-    if(idx===lit)return;
-    if(idx>lit){
-      for(let i=lit+1;i<=idx&&i<total;i++)words[i].classList.add('lit');
-    }else{
-      for(let i=idx+1;i<=lit&&i<total;i++)words[i].classList.remove('lit');
-    }
-    lit=idx;
+    // Reading line at 55% of viewport - everything above the line gets
+    // lit, below stays dim. 55% (not 50%) so the bright zone leads the
+    // eye rather than lagging behind it.
+    const readLine=vh*0.55;
+    const within=readLine-rect.top;
+    const pct=Math.max(0,Math.min(100,(within/rect.height)*100));
+    introText.style.setProperty('--reveal-pct',pct+'%');
   }
   function onScrubScroll(){
     if(!scrubTicking){requestAnimationFrame(updateReveal);scrubTicking=true;}
