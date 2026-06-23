@@ -908,7 +908,7 @@ if(subscribeForm){
           mode: 'no-cors'
         });
         subscribeInput.value = '';
-        setNote('Thanks. Check your inbox to confirm.', 'success');
+        setNote('Thanks. You\'re subscribed.', 'success');
       } else {
         const url = `https://${BEEHIIV_SLUG}.beehiiv.com/subscribe?email=${encodeURIComponent(email)}`;
         window.open(url, '_blank', 'noopener,noreferrer');
