@@ -205,6 +205,58 @@ nav.scrolled::after{opacity:.9}
 }
 .btn-outline:hover{background:var(--fg);color:var(--bg)}
 
+/* Hero email capture form — matches btn-outline visual language */
+.hero-subscribe{
+  display:flex;
+  gap:8px;
+  width:100%;
+  max-width:440px;
+  align-items:stretch;
+}
+.hero-subscribe-input{
+  flex:1;
+  min-width:0;
+  font-family:var(--sans);
+  font-size:13px;
+  font-weight:400;
+  line-height:1;
+  color:var(--fg);
+  background:transparent;
+  border:1px solid var(--fg);
+  border-radius:3px;
+  padding:0 14px;
+  height:46px;
+  outline:none;
+  transition:box-shadow .2s,background .2s;
+  letter-spacing:.01em;
+}
+.hero-subscribe-input::placeholder{color:var(--fg3);font-weight:300;letter-spacing:.01em}
+.hero-subscribe-input:focus{box-shadow:inset 0 0 0 1px var(--fg)}
+.hero-subscribe-input:disabled{opacity:.5;cursor:not-allowed}
+.hero-subscribe-input:-webkit-autofill{
+  -webkit-text-fill-color:var(--fg);
+  -webkit-box-shadow:0 0 0 100px var(--bg) inset;
+  caret-color:var(--fg);
+}
+.hero-subscribe-btn{
+  flex-shrink:0;
+  padding:0 22px;
+  height:46px;
+}
+.hero-subscribe-btn:disabled{opacity:.55;cursor:not-allowed;background:transparent;color:var(--fg)}
+.hero-subscribe-note{
+  margin-top:12px;
+  font-family:var(--sans);
+  font-size:11.5px;
+  font-weight:300;
+  letter-spacing:.04em;
+  color:var(--fg3);
+  min-height:14px;
+  transition:color .2s;
+}
+.hero-subscribe-note.is-success{color:var(--fg2)}
+.hero-subscribe-note.is-error{color:#e26b6b}
+
 /* Hamburger button, mobile only */
 .nav-hamburger{
   display:none;
@@ -501,6 +553,14 @@ footer{position:fixed;bottom:0;left:0;right:0;z-index:50;border-top:1px solid va
 }
 @media(max-width:1100px){.scroll-legend{display:none}}
 
+/* Stack the email form whenever the hero gets narrow.
+   Applies to tablet AND mobile so the input + button don't squeeze. */
+@media(max-width:900px){
+  .hero-subscribe{flex-direction:column;gap:8px;max-width:100%;align-items:stretch}
+  .hero-subscribe-input{width:100%}
+  .hero-subscribe-btn{width:100%}
+}
+
 /* ═══ RESPONSIVE BREAKPOINTS ═══ */
 @media(min-width:600px) and (max-width:900px){
   .hero{grid-template-columns:1.1fr 1fr;gap:24px;padding-top:104px}
@@ -525,6 +585,7 @@ footer{position:fixed;bottom:0;left:0;right:0;z-index:50;border-top:1px solid va
   .hero-content{display:contents}
   .hero-content > .subscribe-wrap{order:1;margin-top:0}
   .subscribe-wrap .cta-group{justify-content:center}
+  .hero-subscribe-note{text-align:center}
   .status-chip{margin-bottom:0}
   .hero-sub{margin-top:0}
   .hero-globe{display:flex;width:100%;justify-content:center}
@@ -598,9 +659,20 @@ footer{position:fixed;bottom:0;left:0;right:0;z-index:50;border-top:1px solid va
     <h1 class="fu d2">Ethereum<br>Institutional</h1>
     <p class="hero-sub fu d3">An independent non-profit dedicated to accelerating the institutional adoption of Ethereum, its L2s, applications and overall ecosystem.</p>
     <div class="subscribe-wrap fu d4">
-      <div class="cta-group">
-        <a href="mailto:hello@ethereuminstitutional.org?subject=Ethereum%20Institute%20Inquiry" class="btn-outline">Reach Out</a>
-      </div>
+      <form class="hero-subscribe" id="hero-subscribe" novalidate>
+        <input
+          type="email"
+          name="email"
+          id="hero-subscribe-email"
+          class="hero-subscribe-input"
+          placeholder="name@company.com"
+          autocomplete="email"
+          required
+          aria-label="Email address"
+        />
+        <button type="submit" class="btn-outline hero-subscribe-btn" id="hero-subscribe-btn">Stay Informed</button>
+      </form>
+      <p class="hero-subscribe-note" id="hero-subscribe-note" aria-live="polite"></p>
     </div>
   </div>
   <div class="hero-globe fi d6" aria-hidden="true">
@@ -792,6 +864,67 @@ function hideGlobeTooltip(){tooltip.classList.remove('show')}
 
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(loadWorldData);
 else window.addEventListener('load',loadWorldData);
+
+/* ═══ Hero email subscribe (beehiiv) ═══ */
+const BEEHIIV_PUBLICATION_ID = '92d6c1b3-3bed-42c4-a98d-cae179dc0cc7';
+const BEEHIIV_SLUG = 'ethereuminstitutional';
+
+const subscribeForm = document.getElementById('hero-subscribe');
+const subscribeInput = document.getElementById('hero-subscribe-email');
+const subscribeBtn = document.getElementById('hero-subscribe-btn');
+const subscribeNote = document.getElementById('hero-subscribe-note');
+
+function setNote(text, kind){
+  subscribeNote.textContent = text;
+  subscribeNote.classList.remove('is-success','is-error');
+  if(kind) subscribeNote.classList.add('is-'+kind);
+}
+
+if(subscribeForm){
+  subscribeForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = subscribeInput.value.trim();
+    if(!email || !email.includes('@')){
+      setNote('Please enter a valid email.', 'error');
+      subscribeInput.focus();
+      return;
+    }
+
+    subscribeBtn.disabled = true;
+    subscribeInput.disabled = true;
+    const origBtnText = subscribeBtn.textContent;
+    subscribeBtn.textContent = 'Sending…';
+    setNote('');
+
+    const hasPubId = BEEHIIV_PUBLICATION_ID && BEEHIIV_PUBLICATION_ID !== 'PASTE_PUBLICATION_ID_HERE';
+
+    try {
+      if(hasPubId){
+        const formData = new FormData();
+        formData.append('email', email);
+        await fetch(`https://embeds.beehiiv.com/${BEEHIIV_PUBLICATION_ID}/subscribe`, {
+          method: 'POST',
+          body: formData,
+          mode: 'no-cors'
+        });
+        subscribeInput.value = '';
+        setNote('Thanks. Check your inbox to confirm.', 'success');
+      } else {
+        const url = `https://${BEEHIIV_SLUG}.beehiiv.com/subscribe?email=${encodeURIComponent(email)}`;
+        window.open(url, '_blank', 'noopener,noreferrer');
+        subscribeInput.value = '';
+        setNote('Continue in the new tab to confirm.', 'success');
+      }
+    } catch (err) {
+      console.error(err);
+      setNote('Something went wrong. Please try again.', 'error');
+    } finally {
+      subscribeBtn.disabled = false;
+      subscribeInput.disabled = false;
+      subscribeBtn.textContent = origBtnText;
+    }
+  });
+}
 </script>
 
 </body>
